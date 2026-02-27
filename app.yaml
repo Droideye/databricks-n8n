@@ -1,5 +1,10 @@
-env: 
-  - name: N8N_PORT
-    value: 8000
-  - name: N8N_HOST 
-    value: 0.0.0.0
+command: ["python", "app.py"]
+env:
+  - name: PORT
+    value: "8000"
+  - name: N8N_BASIC_AUTH_ACTIVE
+    value: "true"
+  - name: N8N_BASIC_AUTH_USER
+    value: "admin"
+  - name: N8N_BASIC_AUTH_PASSWORD
+    value: "210794301105nH"
