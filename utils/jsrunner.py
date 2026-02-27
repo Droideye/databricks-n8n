@@ -185,8 +185,27 @@ class NodeJsEntrypoint:
         self._installer = NodeJSInstaller(version=version, _os=_os, arch=arch)
         self.npm_command_runner = BinaryCommandRunner()
         self.npx_command_runner = BinaryCommandRunner()
+        self._npm_commands = []
         self._commands = []
         self._chdir = None
+
+    def with_npm_command(self, command: Union[List[str], str]):
+        """
+        Adds an npm command to run before the main commands (e.g. install).
+
+        Args:
+            command (Union[List[str], str]): The npm command, e.g. "install n8n@latest".
+            The leading "npm" token is stripped automatically.
+
+        Returns:
+            self: The NodeJsEntrypoint instance, to allow for method chaining.
+        """
+        if isinstance(command, str):
+            command = command.split(" ")
+        if command[0] == "npm":
+            command = command[1:]
+        self._npm_commands.append(command)
+        return self
 
     def with_command(self, command: Union[List[str], str]):
         """
@@ -278,6 +297,10 @@ class NodeJsEntrypoint:
 
         self._setup_binaries()
         self._configure_sys_path()
+        for command in self._npm_commands:
+            print(f"Running npm {command}")
+            resp = self.npm_command_runner.run(command)
+            print(resp)
         for command in self._commands:
             print(f"Running {command}")
             resp = self.npx_command_runner.run(command)
