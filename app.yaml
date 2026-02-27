@@ -2,6 +2,10 @@ command: ["python", "app.py"]
 env:
   - name: PORT
     value: "8000"
+  - name: N8N_PORT
+    value: "8000"
+  - name: N8N_LISTEN_ADDRESS
+    value: "0.0.0.0"
   - name: N8N_BASIC_AUTH_ACTIVE
     value: "true"
   - name: N8N_BASIC_AUTH_USER
