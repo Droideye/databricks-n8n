@@ -72,6 +72,7 @@ class Installer:
 class NodeJSLTS:
     V18_LTS = "v18.20.3"
     V20_LTS = "v20.18.0"
+    V22_LTS = "v22.11.0"
 
 
 class OperatingSystem:
@@ -82,7 +83,7 @@ class OperatingSystem:
 class NodeJSInstaller:
     def __init__(self,
                  target_folder_name: str = None,
-                 version=NodeJSLTS.V20_LTS,
+                 version=NodeJSLTS.V22_LTS,
                  _os=OperatingSystem.LINUX,
                  arch="x64"):
         """
@@ -178,7 +179,7 @@ class BinaryCommandRunner:
 class NodeJsEntrypoint:
 
     def __init__(self,
-                 version=NodeJSLTS.V20_LTS,
+                 version=NodeJSLTS.V22_LTS,
                  _os=OperatingSystem.LINUX,
                  arch="x64"):
         self._installer = NodeJSInstaller(version=version, _os=_os, arch=arch)
